@@ -1,0 +1,30 @@
+matches:
+  - trigger: ":promptrole"
+    form: |
+      Tu es [[role]].
+      Tu as des compétences dans [[specialisation]].
+      Je souhaite [[tache]].
+      Peux-tu écrire "oui" si ton rôle est clair ? Si non, peux-tu me poser des questions pour obtenir les informations manquantes ?
+    form_fields:
+      tache:
+        multiline: true
+  - trigger: ":promptcontext"
+    form: |
+      Je vais maintenant te donner des éléments sur mon contexte.
+      Écris “oui” si c’est clair pour toi. Mon contexte :
+      [[context]]
+    form_fields:
+      context:
+        multiline: true
+  - trigger: ":promptresume"
+    form: |
+      Hello, I'm currently in the process of applying for a new job, and I need your expertise to help me craft a meticulously tailored and highly professional resume that can effectively showcase my qualifications and experiences for this specific role.
+      The position I'm targeting is [[job_title]], and it's with [[company_name]].
+      This role requires a unique set of skills and qualifications, and I want my resume to stand out as the perfect fit.
+      To achieve this, I'm looking for your assistance in creating a comprehensive resume that not only lists my work history and educational background but also strategically highlights my achievements, skills, and relevant certifications.
+      I want this resume to make a compelling case for why I'm the ideal candidate for this position.
+    form_fields:
+      job_title:
+        multiline: true
+      company_name:
+        multiline: true

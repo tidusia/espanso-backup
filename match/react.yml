@@ -1,0 +1,13 @@
+matches:
+  - trigger: ":reacttscomp"
+    form: |
+      import React from "react";
+      import clsx from "clsx";
+      
+      type Props = {
+        className?: string;
+      };
+        
+      export default function MyComponent({ className }: Props): React.ReactElement {
+       return <div className={clsx(className, "w-full")}>Content !</div>;
+      }

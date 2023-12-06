@@ -1,0 +1,24 @@
+matches:
+  - trigger: ":dockerignore"
+    form: |
+      # Global docker ignore
+      **/.dockerignore
+      docker-compose.yml
+      Dockerfile*
+      *.dockerfile
+      .git/
+      
+      # Nodejs app ignore
+      node_modules/
+      
+      # project specific ignores
+      .next/
+      build/
+      storybook-static/
+      
+      # Env
+      .env*
+      
+      # IDE
+      .idea/
+      .vscode/
