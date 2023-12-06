@@ -1,0 +1,53 @@
+matches:
+  - trigger: ":sbstory"
+    form: |
+      import { Meta, StoryObj } from "@storybook/react";
+      import Button from ".";
+      import { userEvent, within, waitFor } from "@storybook/testing-library";
+      import { expect } from "@storybook/jest";
+      
+      export default {
+        component: Button,
+        argTypes: {
+          onClick: { action: true },
+        },
+        parameters: {
+          layout: "centered",
+        },
+      } as Meta<typeof Button>;
+      
+      export const Default: StoryObj<typeof Button> = {
+        args: {
+          content: "Click me",
+        },
+        play: async ({ canvasElement, args }) => {
+          const canvas = within(canvasElement);
+          const user = userEvent.setup({ delay: 50 });
+          await user.click(canvas.getByText("Click me"));
+          await waitFor(() => expect(args.onClick).toHaveBeenCalledTimes(1));
+        },
+      };
+
+  - trigger: ":sbplay"
+    form: |
+      play: async ({ canvasElement, args }) => {
+        const canvas = within(canvasElement);
+        const user = userEvent.setup({ delay: 50 });
+        await user.click(canvas.getByText("Click me"));
+        await waitFor(() => expect(args.onClick).toHaveBeenCalledTimes(1));
+      },
+
+  - trigger: ":sbdecorators"
+    replace: 'decorators: [(story) => <div className="max-w-[384px]">{story()}</div>],'
+
+  - trigger: ":sbmsw"
+    form: |
+      parameters: {
+        msw: {
+          handlers: [
+            rest.get("/profile", (req, res, ctx) =>
+              res(ctx.json(fixtures.profile)),
+            ),
+          ],
+        },
+      },
