@@ -1,0 +1,8 @@
+matches:
+  - trigger: ":script-ip"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "curl 'https://api.ipify.org'"
