@@ -8,6 +8,7 @@ matches:
     form_fields:
       tache:
         multiline: true
+
   - trigger: ":promptcontext"
     form: |
       Je vais maintenant te donner des éléments sur mon contexte.
@@ -16,6 +17,7 @@ matches:
     form_fields:
       context:
         multiline: true
+
   - trigger: ":promptresume"
     form: |
       Hello, I'm currently in the process of applying for a new job, and I need your expertise to help me craft a meticulously tailored and highly professional resume that can effectively showcase my qualifications and experiences for this specific role.
@@ -28,3 +30,26 @@ matches:
         multiline: true
       company_name:
         multiline: true
+
+  - trigger: ":prompt-echelle"
+    label: "Évaluer le niveau et demander une réécriture à un autre niveau."
+    form: |
+      Sur une echelle de 1 à 10.
+      Si 1 correspond à  [[echelle1]].
+      Et 10 correspond à [[echelle10]].
+      À quel niveau se situe [[reponse]]
+      
+      ---
+      Ok, maintenant j'aimerais que tu réécrive ça avec une échelle de X au lieu de Y.
+    form_fields:
+      echelle1:
+        multiline: true
+      echelle10:
+        multiline: true
+
+  - trigger: ":prompt-idees-contenu"
+    label: "Idées pour des articles de blog ou des vidéos"
+    form: |
+      Je créé du contenu pour [[audience]]. 
+      Donne-moi 50 problèmes que ce public pourrait avoir.
+      Inclue un mélange de problèmes pratiques et émotionnels.

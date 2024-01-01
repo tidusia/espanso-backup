@@ -6,7 +6,7 @@ matches:
       import { userEvent, within, waitFor } from "@storybook/testing-library";
       import { expect } from "@storybook/jest";
       
-      export default {
+      const meta: Meta<typeof Button> = {
         component: Button,
         argTypes: {
           onClick: { action: true },
@@ -14,7 +14,8 @@ matches:
         parameters: {
           layout: "centered",
         },
-      } as Meta<typeof Button>;
+      };
+      export default meta;
       
       export const Default: StoryObj<typeof Button> = {
         args: {
