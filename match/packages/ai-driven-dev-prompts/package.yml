@@ -1,0 +1,524 @@
+matches:
+  - trigger: ':codedtsconv'
+    form: |
+      Here is my JSON object:
+
+      "[[code]]"
+
+      Convert it to a TypeScript Type.
+  - trigger: ':codedopt'
+    form: |
+      Please optimize the following code for readability.
+      It must produce the same output, behavior must not change.
+
+      [[code]]
+    form_fields:
+      code:
+        multiline: true
+  - trigger: ':codedstepslog'
+    form: |
+      Add logging on every steps in order to identify bugs.
+  - trigger: ':codedexplainlog'
+    form: |
+      Analyze the following logs.
+
+      "[[code]]"
+
+      Give me a list of top 5 possibilities that explain why:
+
+      [[cause]]
+    form_fields:
+      cause:
+        multiline: true
+  - trigger: ':codedtrans'
+    form: |
+      I need you to translate the following text:
+
+      [[text]]
+
+      It should be translated into the following langage, keep the tone.
+
+      [[languages]]
+    form_fields:
+      text:
+        multiline: true
+      languages:
+        multiline: true
+
+  - trigger: ':instructContextualizeProject'
+    form: |
+      Role: As the AI, act as the lead developer responsible for our project's success. I am a senior software engineer specializing in "[[specific_tech_stack_and_libraries]]". Our users are the application end-users.
+
+      Guidelines:
+      - Provide last to date info.
+      - Always be very concise in your answers.
+      - Enhance readability with bold, italic, and lists as needed.
+      - Adjust based on my feedback.
+      - When in doubt, ask me for more details.
+      - Code generation must be clean, follow the best practices and always provide full code needed with no comments.
+      - Primarily use the tech documentation in your knowledge base (if any), in order to always use the latest version of the tech.
+
+      Project: We are working on "[project name]", focusing on "[project goals]".
+
+      Language used: "[[programming_language_with_particular_version_or_info]]"
+
+      Tech Stack (from package.json or equivalent):
+      [[technologies,_libraries,_and_versions]]
+
+      Project Structure (eg `tree -I "node_modules"`): 
+      [[describe_or_attach_the_project_structure]]
+
+      Development Process: We adhere to Agile, with bi-weekly sprints and CI/CD.
+
+      Collaboration Tools: Git and Ticketing tool like Jira or Linear.
+    form_fields:
+      'technologies,_libraries,_and_versions':
+        multiline: true
+      describe_or_attach_the_project_structure:
+        multiline: true
+  - trigger: ':instructGenerateFeature'
+    form: |
+      Goal:
+      Generate a concise but full breakdown of this feature for our project.
+
+      Rules:
+      - If user-story is too big, group features the more you can.
+      - You MUST provide every required steps, do not forget anything.
+      - Do not generate code or command line instructions, focus on precise steps to achieve the outcome.
+      - It should include epics, user stories with acceptance criteria, sub-tasks.
+
+      Requested Feature:
+      [[feature_to_build,_be_as_detailed_as_possible]]
+
+
+      Here is a styled markdown template example you can inspire yourself with (surrounded by "---" delimiter):
+      ---
+      # Feature's name with Epic
+
+      ## "User Story 1"
+
+      * Acceptance Criteria:
+        * Given: ...
+        * When: ...
+        * Then: ...
+        * And: ...
+
+      ### Sub-tasks
+
+      * "Sub-task title 1.1"
+        * Full step to achieve the outcome
+        * ...
+      ---
+    form_fields:
+      'feature_to_build,_be_as_detailed_as_possible':
+        multiline: true
+  - trigger: ':instructGetSteps'
+    form: |
+      Given the following sub-task (surrounded by "---" delimiter):
+      ---
+      [[subtask_from_features_list]]
+      ---
+
+      Please, fill the following template (surrounded by "---") and output the result in a list grouped by sections.
+
+      Rules:
+      * Details steps must be extremely detailed and should be able to be completed by any developer, regardless of their experience.
+      * The acceptance criteria should be specific and measurable, ensuring that the feature meets the user's needs.
+      * The ticket should be generated in a format that can be easily imported into our project management tool, such as Jira.
+      * Do not go into the details of the code, only the steps to achieve the outcome.
+      * If the output is too long, please inform me and ask me if I want to continue.
+      * If the task need a specific configuration that is required to be done before, please detail it and put your response in bold.
+      * Every steps must be detailed as much as possible and must be completed by any developer, regardless of their experience.
+      - Give me the full project path for each file to edit
+      - If you need to split the task into sub-tasks, please do so.
+      - Choose the right libraries and tools to use if needed.
+      - Provide documentation links if needed.
+
+      Code generation rules:
+      - The code must be clean and follow the best practices.
+      - Always provide all the code, never skip a part of it.
+      - Detail components, functions, and variables names.
+      - Split files the more you can, each file must do only one thing.
+      - Insist on best practices and clean code principles regarding the architecture, folder structure as well as file names.
+
+      ---
+      Title: Brief Description of the Feature
+
+      As a [type of user],
+      I want [an action or feature]
+      so that [benefit or value].
+
+      Detailed steps to achieve the outcome (with code if needed):
+
+      1. ...
+      2. ...
+      3. ...
+      ---
+    form_fields:
+      subtask_from_features_list:
+        multiline: true
+  - trigger: ':instructSpecsAcknowledge'
+    form: |
+      Here are the specifications of the feature I need to code (surrounded by "---" delimiters).
+
+      Now, can you:
+
+      1. Acknowledge it
+      2. Reformulate in bullet point grouped by section to show me that you understood what to do
+      3. Generate development steps (based on an existing projet you do not know nothing about)
+
+      Finally, ask me the relevant questions about implementing the feature in my project regarding my project's tech stack and libraries.
+
+      Ask anything you need to know, like existing code, libraries, mockups available, logics, etc.
+
+      ---
+      [[copy_and_paste_the_specifications_here]]
+      ---
+    form_fields:
+      copy_and_paste_the_specifications_here:
+        multiline: true
+  - trigger: ':instructSpecsIterate'
+    form: |
+      Here are some answers about your previous questions.
+
+      Note that I cannot provide you with the full code, nor answer every details of the question.
+
+      Can you merge this new information together with the previous ones, and then:
+
+      - If there is not absolute need for more details, only give me the required development steps involved in coding the functionality?
+      - If you definitely need more details, please only ask me the crippling questions.
+
+      Here are my answers:
+
+      [[your_answers_to_the_previous_questions]]
+    form_fields:
+      your_answers_to_the_previous_questions:
+        multiline: true
+  - trigger: ':instructSpecsDriving'
+    form: |
+      Please rewrite the coding steps that way:
+
+      [[fixes_from_llm's_answer]]
+    form_fields:
+      fixes_from_llm's_answer:
+        multiline: true
+  - trigger: ':instructDocSearchURL'
+    form: |
+      I need you to read the following documentation.
+
+      "[[documentation_url]]"
+
+      Based on that documentation, can you:
+
+      "[[want_you_want_to_do]]"
+
+      Please provide the best step by step way to it.
+
+      For each step, detail your explanation with the proper code.
+  - trigger: ':instructImageVisualizeHTMLStructure'
+    form: |
+      Please remember the frontend tech I am using for this project.
+
+      For this image, I need you to:
+
+      1. Carefully summarize what you see from it, in small not detailed bullet points.
+      2. Print the structure of the image as you see it.
+      3. Propose an HTML structure of it based on my frontend tech.
+  - trigger: ':instructDBGenerateSchema'
+    form: |
+      I need you to help me creating my SQL database schema.
+
+      Regarding the specifications, can you help me drawing my model?
+
+      Give me the full db schema, with the tables, the columns, the relations between the tables and the constraints from:
+
+      [[entity_list_and_relations_between_entities]]
+    form_fields:
+      entity_list_and_relations_between_entities:
+        multiline: true
+  - trigger: ':instructgeneratepo'
+    form: |
+
+      I need you to help me creating my Plain Object from my SQL database schema.
+
+      1. For each entity, I want you to generate the corresponding type.
+      2. For each relation, I want you to generate the corresponding type.
+      3. No comment in code
+      4. Suffix the type name with "Entity"
+
+      Here is the SQL schema:
+
+      [[sql_schema_from_`insgeneratesqlschema`]]
+    form_fields:
+      sql_schema_from_`insgeneratesqlschema`:
+        multiline: true
+  - trigger: ':instructwritetypefiles'
+    form: |
+      I want to split those types with only 1 type per file. Based on the folder directory we made together, can you tell me where should put each of those?
+
+      Please generate a shell script to create those files and directories:
+
+      [[list_of_types_from_`insgeneratepo`]]
+    form_fields:
+      list_of_types_from_`insgeneratepo`:
+        multiline: true
+  - trigger: ':instructdrawfilestruct'
+    form: |
+      Can you imagine the best folder structure for my features from the user-stories in my specifications?
+
+      Please also generate every needed files and directories.
+  - trigger: ':instructcreatefilestruct'
+    form: |
+      Generate a shell script to create those files and directories:
+
+      [[tree_list_from_:instructdrawfilestruct_output]]
+    form_fields:
+      'tree_list_from_:instructdrawfilestruct_output':
+        multiline: true
+  - trigger: ':instructreviewfilestruct'
+    form: |
+      Based on a feature based structure, I want to review the files and directories names and find the best way to organize them.
+
+      Here is an example for React (but it can be any other language) surrounded by "---" delimiter:
+
+      ---
+      Most of the code lives in the src folder and looks like this:
+
+      src
+      |
+      +-- assets            # assets folder can contain all the static files such as images, fonts, etc.
+      |
+      +-- components        # shared components used across the entire application
+      |
+      +-- config            # all the global configuration, env variables etc. get exported from here and used in the app
+      |
+      +-- features          # feature based modules
+      |
+      +-- hooks             # shared hooks used across the entire application
+      |
+      +-- lib               # re-exporting different libraries preconfigured for the application
+      |
+      +-- providers         # all of the application providers
+      |
+      +-- routes            # routes configuration
+      |
+      +-- stores            # global state stores
+      |
+      +-- test              # test utilities and mock server
+      |
+      +-- types             # base types used across the application
+      |
+      +-- utils             # shared utility functions
+      In order to scale the application in the easiest and most maintainable way, keep most of the code inside the features folder, which should contain different feature-based things. Every feature folder should contain domain specific code for a given feature. This will allow you to keep functionalities scoped to a feature and not mix its declarations with shared things. This is much easier to maintain than a flat folder structure with many files.
+
+      A feature could have the following structure:
+
+      src/features/awesome-feature
+      |
+      +-- api         # exported API request declarations and api hooks related to a specific feature
+      |
+      +-- assets      # assets folder can contain all the static files for a specific feature
+      |
+      +-- components  # components scoped to a specific feature
+      |
+      +-- hooks       # hooks scoped to a specific feature
+      |
+      +-- routes      # route components for a specific feature pages
+      |
+      +-- stores      # state stores for a specific feature
+      |
+      +-- types       # typescript types for TS specific feature domain
+      |
+      +-- utils       # utility functions for a specific feature
+      |
+      +-- index.ts    # entry point for the feature, it should serve as the public API of the given feature and exports everything that should be used outside the feature
+      Everything from a feature should be exported from the index.ts file which behaves as the public API of the feature.
+      ---
+
+      I want you to:
+      - Improve consistency and readability for every file and directory names
+      - Review the files and directories names and unify them (for each change you make, put in parenthesis the previous name)
+      - Find the best way to organize them
+      - Propose a new structure including every files and directories
+
+      Every file names must follow the same convention across the project.
+
+      Some file and directory names are not consistent and I want to improve that, please check every file and directory names must be checked, your new directory proposal must includes every files and directories as well.
+
+      My project file structure is:
+
+      [[list_of_files_and_directories_using_$tree_shell_command]]
+    form_fields:
+      list_of_files_and_directories_using_$tree_shell_command:
+        multiline: true
+  - trigger: ':prackfeat'
+    form: |
+      I need to code this feature, as a developer.
+
+      1. Please acknowledge it
+      2. Reformulate in bullet point grouped by section to show me that you understood what to do
+      3. Draw me the development steps to code, grouped by sections
+
+      Here is the feature:
+
+      [[feature_to_build]]
+    form_fields:
+      feature_to_build:
+        multiline: true
+  - trigger: ':prfeat'
+    form: |
+      I am building a new feature for my project.
+
+      Goal of the feature: [[context]]
+      Incoming parameters are: [[params]]
+      Expected result is: [[result]]
+
+      Please give me every detailed steps to do in order to achieve my goal.
+    form_fields:
+      context:
+        multiline: true
+      params:
+        multiline: true
+      result:
+        multiline: true
+  - trigger: ':prcode'
+    form: |
+      You did understand the feature I want to code.
+      Now, I need your to write the code following my projects requirements (both technical and from a user view).
+
+      You should:
+
+      * Spit files (only if needed, respecting clean code principles and other good practices)
+      * Not put into comment
+      * Function / Variables names must be short, in english and really matching the expected outcome
+  - trigger: ':prrecode'
+    form: |
+      Your code does not work as excepted.
+
+      [[explanation_why_it_is_failing]]
+
+      Can you auto-evaluate your own work?
+
+      1) Remind you the goal and try another way to code it.
+      2) Keep in mind that the code needs to be errorless and get the proper result I asked you about.
+      3) Can you remind me the goal, the entry parameters and the expect output?
+      4) Then provide the steps in order to fix the code you wrote.
+      5) Lastly, check for the generated code in order to be sure that it fits my needs.
+
+      Thank you for you professionalism.
+    form_fields:
+      explanation_why_it_is_failing:
+        multiline: true
+  - trigger: ':prdebug'
+    form: |
+      For this bugfix I am responsible of, here his the context of what I want to do:
+
+      [[the_context_of_what_i_wanted]]
+
+      This is producing this strange behavior, the bug is causing:
+
+      [[what_the_bug_is_doing]]
+
+      Can you give me a list 3 clues regarding my issue in order to find the root cause and then, fix it?
+
+      Please sort them with the more probable first.
+    form_fields:
+      the_context_of_what_i_wanted:
+        multiline: true
+      what_the_bug_is_doing:
+        multiline: true
+  - trigger: ':prfix'
+    form: |
+      The following code is not working the way I want it to.
+
+      "[[code]]"
+
+      This technical error is:
+
+      [[error]]
+
+      When I try to:
+
+      [[action]]
+
+      Please, try to understand the error and then propose the 2 best ways to fix it.
+
+      Do not hesitate to ask me if you have need more information to understand the issue.
+    form_fields:
+      error:
+        multiline: true
+      action:
+        multiline: true
+  - trigger: ':prpretest'
+    form: |
+      I want you to write a test for the this feature:
+
+      [[feature_you_talked_about_previously]]
+
+      Give me a list of tests that need to be done in order to secure the feature delivery in production.
+
+      It must be 100% bullet proof since I cannot afford to have bug in the feature, this is vital to me.
+
+      Every test cases must be covered.
+    form_fields:
+      feature_you_talked_about_previously:
+        multiline: true
+  - trigger: ':prunittests'
+    form: |
+      For the following list of test cases:
+
+      [[your_test_cases_and_the_ones_gave_by_ai]]
+
+      Can you generate the corresponding code to test the following file:
+
+      "[[copy_paste_your_component_here]]"
+
+      Remember, you test must be 100% working.
+    form_fields:
+      your_test_cases_and_the_ones_gave_by_ai:
+        multiline: true
+
+  - trigger: ':llmimproveprompt'
+    form: |
+      This is the prompt I made (surrounded with """) for an a generative artificial intelligence like ChatGPT.
+
+      I need you to help me to make it better in order for the AI to better understand what I am asking about.
+
+      """[[prompt_you_have_made]]"""
+
+      Please reformulate it to be clearer for the AI, do not hesitate to change complexe words with easy ones.
+      Merge duplication and remove not necessary instructions.
+      Be clear and specific.
+      Avoid ambiguity.
+      Use good english, fix text mistakes.
+
+      Please also acknowledge that AI can access URL, documents and generate images.
+  - trigger: ':llmevalanswer'
+    form: |
+      Can you be self-critical of your answer?
+
+      1) Evaluate your own work. List its strengths and weaknesses.
+      2) Give it a mark between 0 and 20. Justify your score in terms of the rules you had to respect.
+      3) Make a list of suggestions that will enable you to achieve a score of 20, again in relation to these rules. Number each suggestion.
+      4) Rewrite your work following the recommendations in point 3).
+      5) Ask me if I'd like to repeat the process. We'll do this until your work is marked 20/20.
+
+      Thank you for you professionalism.
+
+  - trigger: ':vcritizeprevious'
+    form: |
+      Merci, peux-tu faire l'autocritique de ta réponse ?
+
+      1) Évalue ton propre travail. Dresse la liste de ses points forts et de ses points faibles.
+      2) Attribue-lui une note comprise entre 0 et 20. Justifie ta note en fonction des règles que tu devais respecter.
+      3) Fais-toi une liste de suggestions qui te permettront d'atteindre la note 20, toujours par rapport à ces règles. Numérote chaque proposition.
+      4) Réécris ton travail en suivant les recommandations du point 3).
+      5) Demande-moi si je veux répéter le processus. Nous le ferons jusqu'à ce que votre travail soit noté 20/20.
+  - trigger: ':vgenerateimagehighres'
+    form: |
+      Use a high-resolution 16k camera with a 16:9 aspect ratio, a raw style, and a quality setting of 2 to capture this atmospheric scene. –ar 16:9 –v 6 –style raw.
+
+  - trigger: ':languageTSTypeCreateFromObject'
+    form: |
+      Create a TypeScript Type for this Object using Type keyword.
+
