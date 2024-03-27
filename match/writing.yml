@@ -1,0 +1,6 @@
+matches:
+  # Simple text replacement
+  - trigger: ":write-female"
+    replace: "Dans cet article, je m'adresse à une développeuse. Utilise le tutoiement à la place du vouvoiement et modifie la grammaire et l'orthographe en utilisant le féminin à chaque fois que je m'adresse à la lectrice."
+
+

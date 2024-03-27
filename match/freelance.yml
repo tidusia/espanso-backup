@@ -1,0 +1,18 @@
+matches:
+  - trigger: ":freePasLeTemps"
+    form: |
+      Bonjour [[prenom]], 
+  
+      Merci beaucoup pour votre demande 🙏
+      
+      J’aurais beaucoup aimé pouvoir vous aider sur votre projet, mais malheureusement je suis actuellement en mission à temps plein pour une durée indéterminée.
+      
+      Je garde néanmoins votre contact dans le cas où ma situation changerais dans le futur !
+
+      Si vous cherchez des développeurs de confiance, je vous conseille de vous rendre sur mon réseau Greaaat : https://greaaat.com/freelances
+  
+      J’espère que vous trouverez rapidement la personne qu’il vous faut !
+      
+      Excellente journée à vous,
+      
+      Thibaud
