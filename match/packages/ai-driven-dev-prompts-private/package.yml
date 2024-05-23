@@ -1,0 +1,4 @@
+# custom config
+preserve_clipboard: false
+
+matches:

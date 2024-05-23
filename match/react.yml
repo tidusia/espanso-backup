@@ -1,5 +1,26 @@
 matches:
-  - trigger: ":reacttscomp"
+  - trigger: ":ReactTSComp"
+    form: |
+      import React from "react";
+      import clsx from "clsx";
+      
+      type Props = {
+        className?: string;
+      };
+      
+      const [[component_name]] = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
+        const { className } = props;
+      
+        return (
+          <div ref={ref} className={clsx(className, "w-full")}>
+            Content !
+          </div>
+        );
+      });
+      
+      export default [[component_name]];
+
+  - trigger: ":ReactTSForwardedComp"
     form: |
       import React from "react";
       import clsx from "clsx";
@@ -8,6 +29,9 @@ matches:
         className?: string;
       };
         
-      export default function MyComponent({ className }: Props): React.ReactElement {
-       return <div className={clsx(className, "w-full")}>Content !</div>;
-      }
+      const [[component_name]] = React.forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
+        return <div ref={ref} className={clsx(className, "w-full")}>Content !</div>;
+      });
+      
+      export default [[component_name]];
+

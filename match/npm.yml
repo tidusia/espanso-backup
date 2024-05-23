@@ -1,0 +1,5 @@
+matches:
+  - trigger: ":npmUpgradeStorybook"
+    replace: "npx sb@latest upgrade"
+  - trigger: ":npmUpgradeSemver"
+    replace: "npx npm-check-updates --reject '@storybook/*' --target semver -u --peer"

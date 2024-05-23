@@ -2,12 +2,11 @@ matches:
   - trigger: ":sbstory"
     form: |
       import { Meta, StoryObj } from "@storybook/react";
-      import Button from ".";
-      import { userEvent, within, waitFor } from "@storybook/testing-library";
-      import { expect } from "@storybook/jest";
+      import Component from ".";
+      import { userEvent, within, waitFor, expect } from "@storybook/test";
       
-      const meta: Meta<typeof Button> = {
-        component: Button,
+      const meta: Meta<typeof Component> = {
+        component: Component,
         argTypes: {
           onClick: { action: true },
         },
@@ -17,7 +16,7 @@ matches:
       };
       export default meta;
       
-      export const Default: StoryObj<typeof Button> = {
+      export const Default: StoryObj<typeof Component> = {
         args: {
           content: "Click me",
         },
